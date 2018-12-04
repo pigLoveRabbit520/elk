@@ -1,5 +1,5 @@
 logstash:
-  image: logstash:5.0.1
+  image: logstash:6.5.1
   volumes:
     - ./logstash.conf:/etc/logstash.conf
   environment:
@@ -11,11 +11,11 @@ logstash:
     - elasticsearch 
   command: -f /etc/logstash.conf
 elasticsearch: 
-  image: elasticsearch:5.0.1
+  image: elasticsearch:6.5.1
   environment:
-    LOGSPOUT: ignore
+    - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
 kibana: 
-  image: kibana:5.0.1
+  image: kibana:6.5.1
   environment:
     LOGSPOUT: ignore
     ELASTICSEARCH_URL: http://elasticsearch:9200
