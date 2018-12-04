@@ -1,0 +1,26 @@
+logstash:
+  image: logstash:5.0.1
+  volumes:
+    - ./logstash.conf:/etc/logstash.conf
+  environment:
+    LOGSPOUT: ignore
+  ports:
+    - "5000:5000/tcp"
+    - "5000:5000/udp"	
+  links:
+    - elasticsearch 
+  command: -f /etc/logstash.conf
+elasticsearch: 
+  image: elasticsearch:5.0.1
+  environment:
+    LOGSPOUT: ignore
+	
+kibana: 
+  image: kibana:5.0.1
+  environment:
+    LOGSPOUT: ignore
+    ELASTICSEARCH_URL: http://elasticsearch:9200
+  links:
+    - elasticsearch
+  ports:
+    - "5601:5601"
