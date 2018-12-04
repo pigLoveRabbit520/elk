@@ -6,7 +6,7 @@ logstash:
     LOGSPOUT: ignore
   ports:
     - "5000:5000/tcp"
-    - "5000:5000/udp"	
+    - "5000:5000/udp"
   links:
     - elasticsearch 
   command: -f /etc/logstash.conf
@@ -14,7 +14,6 @@ elasticsearch:
   image: elasticsearch:5.0.1
   environment:
     LOGSPOUT: ignore
-	
 kibana: 
   image: kibana:5.0.1
   environment:
